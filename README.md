@@ -25,5 +25,3 @@ Please use ````git commit -m "Useful comment"```` often so we can see how you co
  
 ## Submit 
 When you have finished the project please ```git commit $ git push``` then let use know when you are ready to have us reveiw it. 
-
-Thank you 
