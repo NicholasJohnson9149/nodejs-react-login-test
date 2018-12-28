@@ -5,6 +5,8 @@ The project starts as an empty repo, please download node if you don't already h
 ## Project Discription
 Create a React based login that stores a user email and password in a MongoDB database and allows a user to login to a profile page. You are welcome to use any libraries you like. 
 
+
+## Setup
 We recommend using MLab for a database because it’s really easy for you and allow us to test your application without setting up our own database locally. [mlab's website](https://mlab.com/)
 
 **Please clone this repository and create a new branch with your name before writing any code.**
