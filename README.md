@@ -2,7 +2,7 @@
 
 The project starts as an empty repo, please download node if you don't already have it installed to start the project. [node download page](https://nodejs.org/en/)
 
-## Project Discription
+## Project Description
 Create a React based login that stores a user email and password in a MongoDB database and allows a user to login to a profile page. You are welcome to use any libraries you like. 
 
 
