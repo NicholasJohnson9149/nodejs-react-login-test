@@ -23,3 +23,7 @@ You are welcome to use any react setup you like, I recommend ```create-react-app
 
 Please use ````git commit -m "Useful comment"```` often so we can see how you completed this project in steps. 
  
+## Submit 
+When you have finished the project please ```git commit $ git push``` then let use know when you are ready to have us reveiw it. 
+
+Thank you 
