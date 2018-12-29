@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ loginUser, handleUsernameChange, handlePasswordChange }) => {
   return (
     <div>
       <h1>Login</h1>
         <form>
           <label>
             <p>Username</p>
-            <input type="text" name="username" />
+            <input type="text" name="username" onChange={(e) => {handleUsernameChange(e)}}/>
             <br/>
             <p>Password</p>
-            <input type="text" name="password" />
+            <input type="password" name="password" onChange={(e) => {handlePasswordChange(e)}}/>
           </label>
           <br />
-          <button>Login</button>
+          <button onClick={(e) => {loginUser(e)}}>Login</button>
         </form>
     </div>);
 }
@@ -84,10 +84,10 @@ class App extends React.Component {
         username: this.state.username,
         password: this.state.password
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
     } else {
@@ -95,8 +95,27 @@ class App extends React.Component {
     }
   }
 
-  loginUser() {
-
+  loginUser(e) {
+    e.preventDefault();
+    const validationRegex = /^[a-zA-Z0-9]+$/;
+    
+    if (this.state.username.match(validationRegex) && this.state.password.match(validationRegex)) {
+      console.log(this.state.username, this.state.password);
+      axios.get('/validate/', {
+        params: {      
+          username: this.state.username,
+          password: this.state.password
+        }
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    } else {
+      alert('Please use Alphanumerical values for username and password!');
+    }
   }
 
   render() {
