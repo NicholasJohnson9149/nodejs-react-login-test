@@ -12,11 +12,22 @@ app.use(express.static('public'));
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.post('/register/', (req, res) => {
-  console.log(req.body);
-  registerUser(req.body);
-  res.send('Register!');
+  registerUser(req.body, () => {
+    res.status(200);
+    res.send('User registered!');
+  });
 });
 
-// app.get('/validate/')
+app.get('/validate/', (req, res) => {
+  validateUser(req.query, ([ document ]) => {
+    if (document.password === req.query.password) {
+      res.status(200);
+      res.send('User Validated!');
+    } else {
+      res.status(401);
+      res.send('Unauthorized');
+    }
+  });
+});
 
 app.listen(3000, () => console.log('App listening on port 3000'));
