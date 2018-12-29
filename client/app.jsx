@@ -2,54 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
+import Login from './login.jsx';
+import Register from './Register.jsx';
+import Profile from './Profile.jsx';
 
-const Login = ({ loginUser, handleUsernameChange, handlePasswordChange }) => {
-  return (
-    <div>
-      <h1>Login</h1>
-        <form>
-          <label>
-            <p>Username</p>
-            <input type="text" name="username" onChange={(e) => {handleUsernameChange(e)}}/>
-            <br/>
-            <p>Password</p>
-            <input type="password" name="password" onChange={(e) => {handlePasswordChange(e)}}/>
-          </label>
-          <br />
-          <button onClick={(e) => {loginUser(e)}}>Login</button>
-        </form>
-    </div>);
-}
-
-const Register = ({ registerUser, handleUsernameChange, handlePasswordChange }) => {
-  return (
-    <div>
-      <h1>Register</h1>
-      <form>
-        <label>
-          <p>Username</p>
-          <input type="text" name="username" onChange={(e) => {handleUsernameChange(e)}}/>
-          <br/>
-          <p>Password</p>
-          <input type="password" name="pass" onChange={(e) => {handlePasswordChange(e)}}/>
-        </label>
-        <br />
-        <button onClick={(e) => {registerUser(e)}}>Submit</button>
-      </form>
-    </div>);
-}
-
-const Profile = ({ isAuth, authUser }) => {
-  return ( isAuth && authUser ? (
-      <div>
-        <h1>Welcome {authUser}!</h1>
-      </div>
-      ) : (
-      <div>Please log in</div>
-      )
-    );
-}
- 
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +23,7 @@ class App extends React.Component {
   }
 
   handleUsernameChange(e) {
-\    this.setState({
+    this.setState({
       username: e.target.value
     });
   }
