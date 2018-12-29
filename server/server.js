@@ -19,8 +19,8 @@ app.post('/register/', (req, res) => {
 });
 
 app.get('/validate/', (req, res) => {
-  validateUser(req.query, ([ document ]) => {
-    if (document.password === req.query.password) {
+  validateUser(req.query, (isAuth) => {
+    if (isAuth) {
       res.status(200);
       res.send({ message:'User Validated!', username: req.query.username });
     } else {
