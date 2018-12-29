@@ -22,7 +22,7 @@ app.get('/validate/', (req, res) => {
   validateUser(req.query, ([ document ]) => {
     if (document.password === req.query.password) {
       res.status(200);
-      res.send('User Validated!');
+      res.send({ message:'User Validated!', username: req.query.username });
     } else {
       res.status(401);
       res.send('Unauthorized');
