@@ -39,11 +39,15 @@ const Register = ({ registerUser, handleUsernameChange, handlePasswordChange }) 
     </div>);
 }
 
-const Profile = () => {
-  return (
-    <div>
-      <h1>Profile</h1>
-    </div>);
+const Profile = ({ isAuth, authUser }) => {
+  return ( isAuth && authUser ? (
+      <div>
+        <h1>Welcome {authUser}!</h1>
+      </div>
+      ) : (
+      <div>Please log in</div>
+      )
+    );
 }
  
 class App extends React.Component {
@@ -53,6 +57,7 @@ class App extends React.Component {
       username: '',
       password: '',
       isAuth: false,
+      authUser: '',
     };
 
     this.loginUser = this.loginUser.bind(this);
@@ -62,14 +67,12 @@ class App extends React.Component {
   }
 
   handleUsernameChange(e) {
-    console.log(e.target.value);
-    this.setState({
+\    this.setState({
       username: e.target.value
     });
   }
 
   handlePasswordChange(e) {
-    console.log(e.target.value);
     this.setState({
       password: e.target.value
     });
@@ -100,7 +103,6 @@ class App extends React.Component {
     const validationRegex = /^[a-zA-Z0-9]+$/;
     
     if (this.state.username.match(validationRegex) && this.state.password.match(validationRegex)) {
-      console.log(this.state.username, this.state.password);
       axios.get('/validate/', {
         params: {      
           username: this.state.username,
@@ -109,6 +111,7 @@ class App extends React.Component {
       })
       .then((response) => {
         console.log(response);
+        this.setState({ authUser: response.data.username, isAuth: true });
       })
       .catch((error) => {
         console.log(error);
@@ -125,18 +128,26 @@ class App extends React.Component {
         <Link to="/login/">Login</Link>
         <span> </span>
         <Link to="/register/">Register</Link>
+        <span> </span>
+        <Link to="/profile/">Profile</Link>        
 
         <Route path="/login/" render={props => <Login 
           loginUser={this.loginUser} 
           handleUsernameChange={this.handleUsernameChange}
           handlePasswordChange={this.handlePasswordChange}
-          />} />
+          />} 
+        />
         <Route path="/register/" render={props => <Register 
           registerUser={this.registerUser} 
           handleUsernameChange={this.handleUsernameChange}
           handlePasswordChange={this.handlePasswordChange}
-          />} />
-        <Route path="/profile/" component={Profile} />
+          />}
+        />
+        <Route path="/profile/" render={props => <Profile 
+          isAuth={this.state.isAuth}
+          authUser={this.state.authUser}
+          />} 
+        />
         </div>
       </Router>
       );
